@@ -34,7 +34,7 @@
  *
  * Options: [2400: 0, 9600: 1, 19200: 2, 38400: 3, 57600: 4, 115200: 5, 250000: 6, 500000: 7, 1000000: 8]
  */
-#define BAUDRATE 5  // Default: 5
+#define BAUDRATE 6  // Default: 5
 
 /**
  * Default Primary Language (for Touch-Mode only)
@@ -130,15 +130,15 @@
 //=========================== Machine Settings ==============================
 //===========================================================================
 
-#define HOTEND_NUM      1  // set in 1~6
-#define EXTRUDER_NUM    1  // set in 1~6
-#define FAN_NUM         1  // set in 1~6
-#define FAN_CTRL_NUM    0  // set in 1~2
+#define HOTEND_NUM      2  // set in 1~6
+#define EXTRUDER_NUM    2  // set in 1~6
+#define FAN_NUM         6  // set in 1~6
+#define FAN_CTRL_NUM    6  // set in 1~2
 #define MIXING_EXTRUDER 0  // Default: 0. For mixing_extruder set to 1 (This option turns off autodetection
                            // of the number of extruders)
 
 #define PREHEAT_LABELS   {"PLA", "PETG", "ABS", "WOOD", "TPU", "NYLON"}
-#define PREHEAT_HOTEND   {200,   240,    230,   170,    220,   250}
+#define PREHEAT_HOTEND   {200,   230,    230,   170,    220,   250}
 #define PREHEAT_BED      {60,    70,     90,    50,     50,    90}
 
 #define HEAT_MAX_TEMP    {275,       275,       275,       275,       275,       275,       150,    60}
@@ -190,9 +190,9 @@
 #define X_MIN_POS   0
 #define Y_MIN_POS   0
 #define Z_MIN_POS   0
-#define X_MAX_POS 235
-#define Y_MAX_POS 235
-#define Z_MAX_POS 250
+#define X_MAX_POS 305
+#define Y_MAX_POS 320
+#define Z_MAX_POS 410
 
 /**
  * Raised Z height for probing
@@ -203,8 +203,8 @@
 #define PROBING_Z_RAISE 20.0f
 
 // Pause Settings
-#define NOZZLE_PAUSE_RETRACT_LENGTH               15  // (mm)
-#define NOZZLE_RESUME_PURGE_LENGTH                16  // (mm)
+#define NOZZLE_PAUSE_RETRACT_LENGTH                5  // (mm)
+#define NOZZLE_RESUME_PURGE_LENGTH                 6  // (mm)
 #define NOZZLE_PAUSE_X_POSITION     (X_MIN_POS + 10)  // (mm) Must be an integer
 #define NOZZLE_PAUSE_Y_POSITION     (Y_MIN_POS + 10)  // (mm) Must be an integer
 #define NOZZLE_PAUSE_Z_RAISE                      20  // (mm)
@@ -329,7 +329,7 @@
 #define SHOW_BTT_BOOTSCREEN
 
 // Bootscreen logo time in ms
-#define BTT_BOOTSCREEN_TIME 3000
+#define BTT_BOOTSCREEN_TIME 1000
 
 // Enable alternative Move Menu Buttons Layout matching the direction of actual printer axis
 // Update the icons from alternate icon folder.
@@ -574,13 +574,15 @@
  * Enable Start & End G-code in SETTINGS -> FEATURE menu.
  */
 // Start G-code - run this G-code before starting print
-#define PRINT_START_GCODE "G28 XY R10\n"  // Raise Z 10mm before homing X & Y
+#define PRINT_START_GCODE ""
+//#define PRINT_START_GCODE "G28 XY R10\n"  // Raise Z 10mm before homing X & Y
 
 // End G-code - run this G-code after finishing print
-#define PRINT_END_GCODE "G90\nG1 E-4\nG92 E0\nM18\n"  // Switch to absolute positioning, reduce filament pressure by
+#define PRINT_END_GCODE ""
+//#define PRINT_END_GCODE "G90\nG1 E-4\nG92 E0\nM18\n"  // Switch to absolute positioning, reduce filament pressure by
                                                       // performing small retract, reset extruder position, disable steppers
 
 // Cancel G-code - run this G-code after canceling print
-#define PRINT_CANCEL_GCODE "M104 S0\nM140 S0\nG28 XY R10\nM107\nM18\n"  // Home XY and raise Z 10mm
+#define PRINT_CANCEL_GCODE "M104 S0\nM140 S0\nG91\nG1 Z2\nG90\nG1 Y300\nM107\nM18\n"  // Home XY and raise Z 10mm
 
 #endif
